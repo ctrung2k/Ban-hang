@@ -1,24 +1,27 @@
 CREATE TABLE Product(	--sản phẩm
 Id INT(11) auto INCREMENT PRIMARY KEY,
-TypeID (11),
+TypeID (11) not null,
+SupplierID int(11) not null,
 Name Varchar(200) not null,
 UnitPrice INT(11) not null,
 Description Varchar(200) not null,
+Amount INT(6) not null,
 );
 
 CREATE TABLE ReciptDetail(	--chi tiết hóa đơn
-ReceiptTime datetime,
-ProductId INT(11),
-ReceiptId INT(11),
+ReceiptTime datetime not null,
+ProductId INT(11) not null,
+ReceiptId INT(11) auto increment primary key,
 Amount INT(6) not null,
+UnitPrice double(11) not null,
+TotalPrice double(11) not null,
 );
 
 create table Supplier(	--nhà cung cấp
 SupplierID int(11) auto increment primary key,
-ProductId INT(11),
-ProductName varchar(200) not null,
-ProductPrice double(11),
-Amount INT(6) not null,
+SupplierName varchar(200) not null,
+SupplierAddress varchar(200) not null,,
+SupplierPhone INT(11) not null,
 );
 
 create table Storage(	--kho
