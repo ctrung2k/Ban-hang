@@ -28,11 +28,13 @@ create table Storage(	--kho
 ProductId int(11),
 ProductName varchar(200),
 Amount int(11),
+Ngaynhap DATE , --done
 )
 
 create table Revenue(	--doanh thu
-RevenueDay int(11),
-RevenueMonth int(11),
+RevenueDay double,
+RevenueMonth double,
+StatisticsDate TIMESTAMP --DONE
 )
 
 create table ProductType(	--loại sản phẩm
@@ -45,7 +47,7 @@ ProductName varchar(200),
 Amount int(11),
 UnitPrice double(11),
 TotalPrice double(11), -- total price = amount * unit price
-)
+)-- done
 
 create table CustomerAccount(	--tài khoản khách hàng
 Email varchar(100),
@@ -53,5 +55,14 @@ Pass varchar(100),
 CustomerName varchar(200),
 CustomerAddress varchar(200),
 CustomerPhone int(11),
-CustomerGender bit,
+CustomerGender BOOLEAN,
+ID INT auto increment PRIMARY KEY
+)
+create table StaffAccount(	--tài khoản nhân viên
+Pass varchar(100),
+CustomerName varchar(200),
+CustomerAddress varchar(200),
+CustomerPhone int(11),
+CustomerGender BOOLEAN,
+ID INT auto increment PRIMARY KEY
 )
