@@ -47,6 +47,11 @@ UnitPrice double(11),
 TotalPrice double(11), -- total price = amount * unit price
 )
 
-create table HistoryTransaction(	--lịch sử giao dịch
-
+create table CustomerAccount(	--tài khoản khách hàng
+Email varchar(100),
+Pass varchar(100),
+CustomerName varchar(200),
+CustomerAddress varchar(200),
+CustomerPhone int(11),
+CustomerGender bit,
 )
