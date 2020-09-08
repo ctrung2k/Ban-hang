@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 11:21 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.9
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th9 08, 2020 lúc 11:28 AM
+-- Phiên bản máy phục vụ: 10.4.14-MariaDB
+-- Phiên bản PHP: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ban_hang`
+-- Cơ sở dữ liệu: `banhang`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Cấu trúc bảng cho bảng `product`
 --
 
 CREATE TABLE `product` (
@@ -38,7 +38,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `product`
+-- Đang đổ dữ liệu cho bảng `product`
 --
 
 INSERT INTO `product` (`ID`, `Name`, `UnitPrice`, `TypeID`, `SupplierID`, `Image`, `Description`) VALUES
@@ -56,7 +56,7 @@ INSERT INTO `product` (`ID`, `Name`, `UnitPrice`, `TypeID`, `SupplierID`, `Image
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producttype`
+-- Cấu trúc bảng cho bảng `producttype`
 --
 
 CREATE TABLE `producttype` (
@@ -65,7 +65,7 @@ CREATE TABLE `producttype` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `producttype`
+-- Đang đổ dữ liệu cho bảng `producttype`
 --
 
 INSERT INTO `producttype` (`ID`, `TypeName`) VALUES
@@ -75,7 +75,22 @@ INSERT INTO `producttype` (`ID`, `TypeName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supplier`
+-- Cấu trúc bảng cho bảng `reciptdetail`
+--
+
+CREATE TABLE `reciptdetail` (
+  `ReceiptTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ProductId` int(11) NOT NULL,
+  `ID` int(11) NOT NULL,
+  `Amount` int(6) NOT NULL,
+  `UnitPrice` double NOT NULL,
+  `TotalPrice` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `supplier`
 --
 
 CREATE TABLE `supplier` (
@@ -86,18 +101,18 @@ CREATE TABLE `supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `supplier`
+-- Đang đổ dữ liệu cho bảng `supplier`
 --
 
 INSERT INTO `supplier` (`SupplierID`, `SupplierName`, `SupplierAddress`, `SupplierPhone`) VALUES
 (1, 'Coca-Cola', 'Lầu 10, tòa nhà Metropolitan, 235 Đồng Khởi, Quận 1, tp HCM, Việt Nam', 838961000);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `product`
+-- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`ID`),
@@ -105,45 +120,57 @@ ALTER TABLE `product`
   ADD KEY `pd_supid_sup_supid` (`SupplierID`);
 
 --
--- Indexes for table `producttype`
+-- Chỉ mục cho bảng `producttype`
 --
 ALTER TABLE `producttype`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table `supplier`
+-- Chỉ mục cho bảng `reciptdetail`
+--
+ALTER TABLE `reciptdetail`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`SupplierID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT cho bảng `product`
 --
 ALTER TABLE `product`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `producttype`
+-- AUTO_INCREMENT cho bảng `producttype`
 --
 ALTER TABLE `producttype`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `supplier`
+-- AUTO_INCREMENT cho bảng `reciptdetail`
+--
+ALTER TABLE `reciptdetail`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `supplier`
 --
 ALTER TABLE `supplier`
   MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `product`
+-- Các ràng buộc cho bảng `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `pd_Typeid_pdt_ID` FOREIGN KEY (`TypeID`) REFERENCES `producttype` (`ID`),

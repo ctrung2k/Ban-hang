@@ -6,7 +6,7 @@ Name Varchar(200) not null,
 UnitPrice INT(11) not null,
 Description Varchar(200) not null,
 Amount INT(6) not null,
-);
+); --done
 
 CREATE TABLE ReciptDetail(	--chi tiết hóa đơn
 ReceiptTime datetime not null,
@@ -15,14 +15,14 @@ ReceiptId INT(11) auto increment primary key,
 Amount INT(6) not null,
 UnitPrice double(11) not null,
 TotalPrice double(11) not null,
-);
+);--done
 
 create table Supplier(	--nhà cung cấp
 SupplierID int(11) auto increment primary key,
 SupplierName varchar(200) not null,
 SupplierAddress varchar(200) not null,,
 SupplierPhone INT(11) not null,
-);
+);--done
 
 create table Storage(	--kho
 ProductId int(11),
@@ -38,7 +38,7 @@ RevenueMonth int(11),
 create table ProductType(	--loại sản phẩm
 TypeID int(11), auto increment primary key,
 TypeName varchar(200),
-)
+)--done
 
 create table Cart(      --giỏ hàng
 ProductName varchar(200),
