@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 09, 2020 lúc 08:58 AM
+-- Thời gian đã tạo: Th9 09, 2020 lúc 09:05 AM
 -- Phiên bản máy phục vụ: 10.4.14-MariaDB
 -- Phiên bản PHP: 7.4.9
 
@@ -20,6 +20,66 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `banhang`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `bill`
+--
+
+CREATE TABLE `bill` (
+  `ProductId` int(11) NOT NULL,
+  `Amount` int(11) NOT NULL,
+  `UnitPrice` double NOT NULL,
+  `TotalPrice` double NOT NULL,
+  `ID` int(11) NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CustomerId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `customeraccount`
+--
+
+CREATE TABLE `customeraccount` (
+  `Email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Pass` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Phone` int(11) NOT NULL,
+  `Gender` tinyint(1) NOT NULL,
+  `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `entryform`
+--
+
+CREATE TABLE `entryform` (
+  `ProductId` int(11) NOT NULL,
+  `ProducName` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Amount` int(11) NOT NULL,
+  `Ngaynhap` date NOT NULL,
+  `TypeId` int(11) NOT NULL,
+  `SupplierID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `permission`
+--
+
+CREATE TABLE `permission` (
+  `ID` int(11) NOT NULL,
+  `OrderManager` tinyint(1) NOT NULL,
+  `thongkekho` tinyint(1) NOT NULL,
+  `StafManager` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -90,6 +150,33 @@ CREATE TABLE `reciptdetail` (
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `revenue`
+--
+
+CREATE TABLE `revenue` (
+  `RevenueDay` double NOT NULL,
+  `RevenueMonth` double NOT NULL,
+  `StatisticsDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `staffaccount`
+--
+
+CREATE TABLE `staffaccount` (
+  `ID` int(11) NOT NULL,
+  `Name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Phone` int(11) NOT NULL,
+  `Address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `PASS` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `supplier`
 --
 
@@ -112,6 +199,26 @@ INSERT INTO `supplier` (`SupplierID`, `SupplierName`, `SupplierAddress`, `Suppli
 --
 
 --
+-- Chỉ mục cho bảng `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `customeraccount`
+--
+ALTER TABLE `customeraccount`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Chỉ mục cho bảng `entryform`
+--
+ALTER TABLE `entryform`
+  ADD KEY `id_sto_id_prod` (`ProductId`),
+  ADD KEY `TypeId` (`TypeId`),
+  ADD KEY `id_sup_id_ent` (`SupplierID`);
+
+--
 -- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
@@ -131,6 +238,12 @@ ALTER TABLE `reciptdetail`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Chỉ mục cho bảng `staffaccount`
+--
+ALTER TABLE `staffaccount`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Chỉ mục cho bảng `supplier`
 --
 ALTER TABLE `supplier`
@@ -139,6 +252,18 @@ ALTER TABLE `supplier`
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
+
+--
+-- AUTO_INCREMENT cho bảng `bill`
+--
+ALTER TABLE `bill`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `customeraccount`
+--
+ALTER TABLE `customeraccount`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product`
@@ -159,6 +284,12 @@ ALTER TABLE `reciptdetail`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `staffaccount`
+--
+ALTER TABLE `staffaccount`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `supplier`
 --
 ALTER TABLE `supplier`
@@ -167,6 +298,14 @@ ALTER TABLE `supplier`
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `entryform`
+--
+ALTER TABLE `entryform`
+  ADD CONSTRAINT `entryform_ibfk_1` FOREIGN KEY (`TypeId`) REFERENCES `producttype` (`ID`),
+  ADD CONSTRAINT `id_sto_id_prod` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ID`),
+  ADD CONSTRAINT `id_sup_id_ent` FOREIGN KEY (`SupplierID`) REFERENCES `supplier` (`SupplierID`);
 
 --
 -- Các ràng buộc cho bảng `product`
