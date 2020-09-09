@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 09, 2020 lúc 09:05 AM
--- Phiên bản máy phục vụ: 10.4.14-MariaDB
--- Phiên bản PHP: 7.4.9
+-- Host: 127.0.0.1
+-- Generation Time: Sep 09, 2020 at 10:07 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,48 +18,99 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `banhang`
+-- Database: `ban_hang`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bill`
+-- Table structure for table `chitiet_hoadon`
 --
 
-CREATE TABLE `bill` (
+CREATE TABLE `chitiet_hoadon` (
+  `ReceiptTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ProductId` int(11) NOT NULL,
+  `Bill_ID` int(11) NOT NULL,
+  `Amount` int(6) NOT NULL,
+  `UnitPrice` double NOT NULL,
+  `TotalPrice` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doanh_thu`
+--
+
+CREATE TABLE `doanh_thu` (
+  `RevenueDay` double NOT NULL,
+  `RevenueMonth` double NOT NULL,
+  `StatisticsDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoa_don`
+--
+
+CREATE TABLE `hoa_don` (
   `ProductId` int(11) NOT NULL,
   `Amount` int(11) NOT NULL,
   `UnitPrice` double NOT NULL,
   `TotalPrice` double NOT NULL,
   `ID` int(11) NOT NULL,
   `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `CustomerId` int(11) NOT NULL
+  `CustomerId` int(11) NOT NULL,
+  `ID_nhanvien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `customeraccount`
+-- Table structure for table `loai_sanpham`
 --
 
-CREATE TABLE `customeraccount` (
-  `Email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `Pass` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `Name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `Address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `Phone` int(11) NOT NULL,
-  `Gender` tinyint(1) NOT NULL,
-  `ID` int(11) NOT NULL
+CREATE TABLE `loai_sanpham` (
+  `ID` int(11) NOT NULL,
+  `TypeName` varchar(200) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `loai_sanpham`
+--
+
+INSERT INTO `loai_sanpham` (`ID`, `TypeName`) VALUES
+(1, 'Nước uống đóng chai / lon'),
+(2, 'Đồ ăn nhẹ đóng gói');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `entryform`
+-- Table structure for table `nha_cungcap`
 --
 
-CREATE TABLE `entryform` (
+CREATE TABLE `nha_cungcap` (
+  `SupplierID` int(11) NOT NULL,
+  `SupplierName` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `SupplierAddress` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `SupplierPhone` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `nha_cungcap`
+--
+
+INSERT INTO `nha_cungcap` (`SupplierID`, `SupplierName`, `SupplierAddress`, `SupplierPhone`) VALUES
+(1, 'Coca-Cola', 'Lầu 10, tòa nhà Metropolitan, 235 Đồng Khởi, Quận 1, tp HCM, Việt Nam', 838961000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phieu_nhap`
+--
+
+CREATE TABLE `phieu_nhap` (
   `ProductId` int(11) NOT NULL,
   `ProducName` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `Amount` int(11) NOT NULL,
@@ -71,11 +122,11 @@ CREATE TABLE `entryform` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `permission`
+-- Table structure for table `quyen_han`
 --
 
-CREATE TABLE `permission` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE `quyen_han` (
+  `Nhanvien_ID` int(11) NOT NULL,
   `OrderManager` tinyint(1) NOT NULL,
   `thongkekho` tinyint(1) NOT NULL,
   `StafManager` tinyint(1) NOT NULL
@@ -84,10 +135,10 @@ CREATE TABLE `permission` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `product`
+-- Table structure for table `san_pham`
 --
 
-CREATE TABLE `product` (
+CREATE TABLE `san_pham` (
   `ID` int(11) NOT NULL,
   `Name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `UnitPrice` double NOT NULL,
@@ -98,10 +149,10 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `product`
+-- Dumping data for table `san_pham`
 --
 
-INSERT INTO `product` (`ID`, `Name`, `UnitPrice`, `TypeID`, `Image`, `Description`, `Amount`) VALUES
+INSERT INTO `san_pham` (`ID`, `Name`, `UnitPrice`, `TypeID`, `Image`, `Description`, `Amount`) VALUES
 (11, 'Coke (chai nhựa)', 7000, 1, '', '', 0),
 (12, 'Diet coke (lon)', 7000, 1, '', '', 0),
 (13, 'Fanta cam (chai nhựa)', 7000, 1, '', '', 0),
@@ -116,56 +167,26 @@ INSERT INTO `product` (`ID`, `Name`, `UnitPrice`, `TypeID`, `Image`, `Descriptio
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `producttype`
+-- Table structure for table `taikhoan_khachhang`
 --
 
-CREATE TABLE `producttype` (
-  `ID` int(11) NOT NULL,
-  `TypeName` varchar(200) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `producttype`
---
-
-INSERT INTO `producttype` (`ID`, `TypeName`) VALUES
-(1, 'Nước uống đóng chai / lon'),
-(2, 'Đồ ăn nhẹ đóng gói');
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `reciptdetail`
---
-
-CREATE TABLE `reciptdetail` (
-  `ReceiptTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `ProductId` int(11) NOT NULL,
-  `ID` int(11) NOT NULL,
-  `Amount` int(6) NOT NULL,
-  `UnitPrice` double NOT NULL,
-  `TotalPrice` double NOT NULL
+CREATE TABLE `taikhoan_khachhang` (
+  `Email` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Pass` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `Phone` int(11) NOT NULL,
+  `Gender` tinyint(1) NOT NULL,
+  `ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `revenue`
+-- Table structure for table `taikhoan_nhanvien`
 --
 
-CREATE TABLE `revenue` (
-  `RevenueDay` double NOT NULL,
-  `RevenueMonth` double NOT NULL,
-  `StatisticsDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `staffaccount`
---
-
-CREATE TABLE `staffaccount` (
+CREATE TABLE `taikhoan_nhanvien` (
   `ID` int(11) NOT NULL,
   `Name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `Phone` int(11) NOT NULL,
@@ -174,144 +195,145 @@ CREATE TABLE `staffaccount` (
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `supplier`
---
-
-CREATE TABLE `supplier` (
-  `SupplierID` int(11) NOT NULL,
-  `SupplierName` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `SupplierAddress` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `SupplierPhone` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `supplier`
---
-
-INSERT INTO `supplier` (`SupplierID`, `SupplierName`, `SupplierAddress`, `SupplierPhone`) VALUES
-(1, 'Coca-Cola', 'Lầu 10, tòa nhà Metropolitan, 235 Đồng Khởi, Quận 1, tp HCM, Việt Nam', 838961000);
-
---
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `bill`
+-- Indexes for table `chitiet_hoadon`
 --
-ALTER TABLE `bill`
+ALTER TABLE `chitiet_hoadon`
+  ADD KEY `ID_chitiet_ID_hoadon` (`Bill_ID`);
+
+--
+-- Indexes for table `hoa_don`
+--
+ALTER TABLE `hoa_don`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_hoadon_ID_khachhang` (`CustomerId`),
+  ADD KEY `ID_hoadon_ID_nhanvien` (`ID_nhanvien`);
+
+--
+-- Indexes for table `loai_sanpham`
+--
+ALTER TABLE `loai_sanpham`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Chỉ mục cho bảng `customeraccount`
+-- Indexes for table `nha_cungcap`
 --
-ALTER TABLE `customeraccount`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `nha_cungcap`
+  ADD PRIMARY KEY (`SupplierID`);
 
 --
--- Chỉ mục cho bảng `entryform`
+-- Indexes for table `phieu_nhap`
 --
-ALTER TABLE `entryform`
+ALTER TABLE `phieu_nhap`
   ADD KEY `id_sto_id_prod` (`ProductId`),
   ADD KEY `TypeId` (`TypeId`),
   ADD KEY `id_sup_id_ent` (`SupplierID`);
 
 --
--- Chỉ mục cho bảng `product`
+-- Indexes for table `quyen_han`
 --
-ALTER TABLE `product`
+ALTER TABLE `quyen_han`
+  ADD KEY `ID_nhanvien_ID_quyenhan` (`Nhanvien_ID`);
+
+--
+-- Indexes for table `san_pham`
+--
+ALTER TABLE `san_pham`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `pd_Typeid_pdt_ID` (`TypeID`);
 
 --
--- Chỉ mục cho bảng `producttype`
+-- Indexes for table `taikhoan_khachhang`
 --
-ALTER TABLE `producttype`
+ALTER TABLE `taikhoan_khachhang`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Chỉ mục cho bảng `reciptdetail`
+-- Indexes for table `taikhoan_nhanvien`
 --
-ALTER TABLE `reciptdetail`
+ALTER TABLE `taikhoan_nhanvien`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Chỉ mục cho bảng `staffaccount`
---
-ALTER TABLE `staffaccount`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Chỉ mục cho bảng `supplier`
---
-ALTER TABLE `supplier`
-  ADD PRIMARY KEY (`SupplierID`);
-
---
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `bill`
+-- AUTO_INCREMENT for table `hoa_don`
 --
-ALTER TABLE `bill`
+ALTER TABLE `hoa_don`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `customeraccount`
+-- AUTO_INCREMENT for table `loai_sanpham`
 --
-ALTER TABLE `customeraccount`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `product`
---
-ALTER TABLE `product`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT cho bảng `producttype`
---
-ALTER TABLE `producttype`
+ALTER TABLE `loai_sanpham`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `reciptdetail`
+-- AUTO_INCREMENT for table `nha_cungcap`
 --
-ALTER TABLE `reciptdetail`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `staffaccount`
---
-ALTER TABLE `staffaccount`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `supplier`
---
-ALTER TABLE `supplier`
+ALTER TABLE `nha_cungcap`
   MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- AUTO_INCREMENT for table `san_pham`
+--
+ALTER TABLE `san_pham`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `taikhoan_khachhang`
+--
+ALTER TABLE `taikhoan_khachhang`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `taikhoan_nhanvien`
+--
+ALTER TABLE `taikhoan_nhanvien`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `entryform`
+-- Constraints for table `chitiet_hoadon`
 --
-ALTER TABLE `entryform`
-  ADD CONSTRAINT `entryform_ibfk_1` FOREIGN KEY (`TypeId`) REFERENCES `producttype` (`ID`),
-  ADD CONSTRAINT `id_sto_id_prod` FOREIGN KEY (`ProductId`) REFERENCES `product` (`ID`),
-  ADD CONSTRAINT `id_sup_id_ent` FOREIGN KEY (`SupplierID`) REFERENCES `supplier` (`SupplierID`);
+ALTER TABLE `chitiet_hoadon`
+  ADD CONSTRAINT `ID_chitiet_ID_hoadon` FOREIGN KEY (`Bill_ID`) REFERENCES `hoa_don` (`ID`);
 
 --
--- Các ràng buộc cho bảng `product`
+-- Constraints for table `hoa_don`
 --
-ALTER TABLE `product`
-  ADD CONSTRAINT `pd_Typeid_pdt_ID` FOREIGN KEY (`TypeID`) REFERENCES `producttype` (`ID`);
+ALTER TABLE `hoa_don`
+  ADD CONSTRAINT `ID_hoadon_ID_khachhang` FOREIGN KEY (`CustomerId`) REFERENCES `taikhoan_khachhang` (`ID`),
+  ADD CONSTRAINT `ID_hoadon_ID_nhanvien` FOREIGN KEY (`ID_nhanvien`) REFERENCES `taikhoan_nhanvien` (`ID`);
+
+--
+-- Constraints for table `phieu_nhap`
+--
+ALTER TABLE `phieu_nhap`
+  ADD CONSTRAINT `id_sto_id_prod` FOREIGN KEY (`ProductId`) REFERENCES `san_pham` (`ID`),
+  ADD CONSTRAINT `id_sup_id_ent` FOREIGN KEY (`SupplierID`) REFERENCES `nha_cungcap` (`SupplierID`),
+  ADD CONSTRAINT `phieu_nhap_ibfk_1` FOREIGN KEY (`TypeId`) REFERENCES `loai_sanpham` (`ID`);
+
+--
+-- Constraints for table `quyen_han`
+--
+ALTER TABLE `quyen_han`
+  ADD CONSTRAINT `ID_nhanvien_ID_quyenhan` FOREIGN KEY (`Nhanvien_ID`) REFERENCES `taikhoan_nhanvien` (`ID`);
+
+--
+-- Constraints for table `san_pham`
+--
+ALTER TABLE `san_pham`
+  ADD CONSTRAINT `pd_Typeid_pdt_ID` FOREIGN KEY (`TypeID`) REFERENCES `loai_sanpham` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
