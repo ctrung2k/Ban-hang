@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2020 at 10:07 AM
+-- Generation Time: Sep 09, 2020 at 11:41 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -55,14 +55,12 @@ CREATE TABLE `doanh_thu` (
 --
 
 CREATE TABLE `hoa_don` (
-  `ProductId` int(11) NOT NULL,
-  `Amount` int(11) NOT NULL,
-  `UnitPrice` double NOT NULL,
   `TotalPrice` double NOT NULL,
   `ID` int(11) NOT NULL,
   `Date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `CustomerId` int(11) NOT NULL,
-  `ID_nhanvien` int(11) NOT NULL
+  `ID_nhanvien` int(11) NOT NULL,
+  `nhacungcap` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
