@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2020 at 06:39 AM
+-- Generation Time: Sep 15, 2020 at 12:16 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cuahang_sanpham` (
   `ID_cuahang` int(11) NOT NULL,
-  `ID_sanpham` int(11) NOT NULL,
+  `ID_sanpham` bigint(13) NOT NULL,
   `Gia_theo_quan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -154,7 +154,7 @@ CREATE TABLE `quyen_han` (
 --
 
 CREATE TABLE `san_pham` (
-  `ID_sanpham` int(11) NOT NULL,
+  `ID_sanpham` bigint(13) NOT NULL,
   `Ten_sanpham` varchar(200) NOT NULL,
   `Soluong_tonkho` int(11) NOT NULL,
   `ID_loaisp` int(11) NOT NULL
@@ -280,12 +280,6 @@ ALTER TABLE `quyen_han`
   MODIFY `ID_chucvu` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `san_pham`
---
-ALTER TABLE `san_pham`
-  MODIFY `ID_sanpham` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Constraints for dumped tables
 --
 
@@ -309,8 +303,7 @@ ALTER TABLE `hoa_don`
 -- Constraints for table `hoa_don_chitiet`
 --
 ALTER TABLE `hoa_don_chitiet`
-  ADD CONSTRAINT `hoa_don_chitiet_ibfk_1` FOREIGN KEY (`ID_hoadon`) REFERENCES `hoa_don` (`ID_hoadon`),
-  ADD CONSTRAINT `hoa_don_chitiet_ibfk_2` FOREIGN KEY (`ID_sanpham`) REFERENCES `san_pham` (`ID_sanpham`);
+  ADD CONSTRAINT `hoa_don_chitiet_ibfk_1` FOREIGN KEY (`ID_hoadon`) REFERENCES `hoa_don` (`ID_hoadon`);
 
 --
 -- Constraints for table `khach_hang`
