@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2020 at 12:16 PM
+-- Generation Time: Sep 17, 2020 at 11:55 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -43,6 +43,17 @@ CREATE TABLE `cua_hang` (
   `ID_cuahang` int(11) NOT NULL,
   `Ten_cuahang` varchar(50) NOT NULL,
   `Diachi_cuahang` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danhmuc_sanpham`
+--
+
+CREATE TABLE `danhmuc_sanpham` (
+  `ID_loaisp` int(11) NOT NULL,
+  `Ten_loai` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -95,17 +106,6 @@ CREATE TABLE `khach_hang` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loai_sanpham`
---
-
-CREATE TABLE `loai_sanpham` (
-  `ID_loaisp` int(11) NOT NULL,
-  `Ten_loai` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `nhan_vien`
 --
 
@@ -132,6 +132,19 @@ CREATE TABLE `nha_cungcap` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quang_cao`
+--
+
+CREATE TABLE `quang_cao` (
+  `ID_Chuongtrinh` varchar(50) NOT NULL,
+  `Ten_Chuongtrinh` varchar(200) NOT NULL,
+  `Mota_Chuongtrinh` text NOT NULL,
+  `Hinhanh_Chuongtrinh` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `quyen_han`
 --
 
@@ -150,6 +163,17 @@ CREATE TABLE `quyen_han` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sanpham_yeuthich`
+--
+
+CREATE TABLE `sanpham_yeuthich` (
+  `ID_Khachhang` int(11) NOT NULL,
+  `ID_sanpham` bigint(13) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `san_pham`
 --
 
@@ -157,7 +181,22 @@ CREATE TABLE `san_pham` (
   `ID_sanpham` bigint(13) NOT NULL,
   `Ten_sanpham` varchar(200) NOT NULL,
   `Soluong_tonkho` int(11) NOT NULL,
-  `ID_loaisp` int(11) NOT NULL
+  `ID_loaisp` int(11) NOT NULL,
+  `Sanpham_hot` tinyint(1) NOT NULL,
+  `Sanpham_moi` tinyint(1) NOT NULL,
+  `Hinh_sanpham` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ton_kho`
+--
+
+CREATE TABLE `ton_kho` (
+  `Ngay_Ton` int(11) NOT NULL,
+  `ID_sanpham` int(11) NOT NULL,
+  `Soluong_Ton` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -176,6 +215,12 @@ ALTER TABLE `cuahang_sanpham`
 --
 ALTER TABLE `cua_hang`
   ADD PRIMARY KEY (`ID_cuahang`);
+
+--
+-- Indexes for table `danhmuc_sanpham`
+--
+ALTER TABLE `danhmuc_sanpham`
+  ADD PRIMARY KEY (`ID_loaisp`);
 
 --
 -- Indexes for table `hoa_don`
@@ -202,12 +247,6 @@ ALTER TABLE `khach_hang`
   ADD KEY `ID_chucvu` (`ID_chucvu`);
 
 --
--- Indexes for table `loai_sanpham`
---
-ALTER TABLE `loai_sanpham`
-  ADD PRIMARY KEY (`ID_loaisp`);
-
---
 -- Indexes for table `nhan_vien`
 --
 ALTER TABLE `nhan_vien`
@@ -221,10 +260,23 @@ ALTER TABLE `nha_cungcap`
   ADD PRIMARY KEY (`ID_nhacc`);
 
 --
+-- Indexes for table `quang_cao`
+--
+ALTER TABLE `quang_cao`
+  ADD PRIMARY KEY (`ID_Chuongtrinh`);
+
+--
 -- Indexes for table `quyen_han`
 --
 ALTER TABLE `quyen_han`
   ADD PRIMARY KEY (`ID_chucvu`);
+
+--
+-- Indexes for table `sanpham_yeuthich`
+--
+ALTER TABLE `sanpham_yeuthich`
+  ADD KEY `ID_Khachhang` (`ID_Khachhang`),
+  ADD KEY `ID_sanpham` (`ID_sanpham`);
 
 --
 -- Indexes for table `san_pham`
@@ -244,6 +296,12 @@ ALTER TABLE `cua_hang`
   MODIFY `ID_cuahang` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `danhmuc_sanpham`
+--
+ALTER TABLE `danhmuc_sanpham`
+  MODIFY `ID_loaisp` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `hoa_don`
 --
 ALTER TABLE `hoa_don`
@@ -254,12 +312,6 @@ ALTER TABLE `hoa_don`
 --
 ALTER TABLE `khach_hang`
   MODIFY `ID_Khachhang` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `loai_sanpham`
---
-ALTER TABLE `loai_sanpham`
-  MODIFY `ID_loaisp` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `nhan_vien`
@@ -318,10 +370,17 @@ ALTER TABLE `nhan_vien`
   ADD CONSTRAINT `nhan_vien_ibfk_1` FOREIGN KEY (`ID_chucvu`) REFERENCES `quyen_han` (`ID_chucvu`);
 
 --
+-- Constraints for table `sanpham_yeuthich`
+--
+ALTER TABLE `sanpham_yeuthich`
+  ADD CONSTRAINT `sanpham_yeuthich_ibfk_1` FOREIGN KEY (`ID_Khachhang`) REFERENCES `khach_hang` (`ID_Khachhang`),
+  ADD CONSTRAINT `sanpham_yeuthich_ibfk_2` FOREIGN KEY (`ID_sanpham`) REFERENCES `san_pham` (`ID_sanpham`);
+
+--
 -- Constraints for table `san_pham`
 --
 ALTER TABLE `san_pham`
-  ADD CONSTRAINT `san_pham_ibfk_2` FOREIGN KEY (`ID_loaisp`) REFERENCES `loai_sanpham` (`ID_loaisp`);
+  ADD CONSTRAINT `san_pham_ibfk_1` FOREIGN KEY (`ID_loaisp`) REFERENCES `danhmuc_sanpham` (`ID_loaisp`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
