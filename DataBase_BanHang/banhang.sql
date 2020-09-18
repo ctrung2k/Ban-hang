@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 17, 2020 at 11:55 AM
+-- Generation Time: Sep 18, 2020 at 12:36 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -69,7 +69,8 @@ CREATE TABLE `hoa_don` (
   `Thanh_tien` double NOT NULL,
   `ID_Khachhang` int(11) NOT NULL,
   `ID_cuahang` int(11) NOT NULL,
-  `ID_nhanvien` int(11) NOT NULL
+  `ID_nhanvien` int(11) NOT NULL,
+  `ID_Chuongtrinh` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -195,8 +196,9 @@ CREATE TABLE `san_pham` (
 
 CREATE TABLE `ton_kho` (
   `Ngay_Ton` int(11) NOT NULL,
-  `ID_sanpham` int(11) NOT NULL,
-  `Soluong_Ton` int(11) NOT NULL
+  `ID_sanpham` bigint(13) NOT NULL,
+  `Soluong_Ton` int(11) NOT NULL,
+  `ID_cuahang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -230,7 +232,8 @@ ALTER TABLE `hoa_don`
   ADD KEY `ID_cuahang` (`ID_cuahang`),
   ADD KEY `ID_nhanvien` (`ID_nhanvien`),
   ADD KEY `ID_Khachhang` (`ID_Khachhang`),
-  ADD KEY `ID_nhacc` (`ID_nhacc`);
+  ADD KEY `ID_nhacc` (`ID_nhacc`),
+  ADD KEY `ID_Chuongtrinh` (`ID_Chuongtrinh`);
 
 --
 -- Indexes for table `hoa_don_chitiet`
@@ -284,6 +287,13 @@ ALTER TABLE `sanpham_yeuthich`
 ALTER TABLE `san_pham`
   ADD PRIMARY KEY (`ID_sanpham`),
   ADD KEY `ID_loaisp` (`ID_loaisp`);
+
+--
+-- Indexes for table `ton_kho`
+--
+ALTER TABLE `ton_kho`
+  ADD KEY `ID_sanpham` (`ID_sanpham`),
+  ADD KEY `ID_cuahang` (`ID_cuahang`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -349,7 +359,8 @@ ALTER TABLE `hoa_don`
   ADD CONSTRAINT `hoa_don_ibfk_1` FOREIGN KEY (`ID_cuahang`) REFERENCES `cua_hang` (`ID_cuahang`),
   ADD CONSTRAINT `hoa_don_ibfk_2` FOREIGN KEY (`ID_nhanvien`) REFERENCES `nhan_vien` (`ID_nhanvien`),
   ADD CONSTRAINT `hoa_don_ibfk_3` FOREIGN KEY (`ID_Khachhang`) REFERENCES `khach_hang` (`ID_Khachhang`),
-  ADD CONSTRAINT `hoa_don_ibfk_4` FOREIGN KEY (`ID_nhacc`) REFERENCES `nha_cungcap` (`ID_nhacc`);
+  ADD CONSTRAINT `hoa_don_ibfk_4` FOREIGN KEY (`ID_nhacc`) REFERENCES `nha_cungcap` (`ID_nhacc`),
+  ADD CONSTRAINT `hoa_don_ibfk_5` FOREIGN KEY (`ID_Chuongtrinh`) REFERENCES `quang_cao` (`ID_Chuongtrinh`);
 
 --
 -- Constraints for table `hoa_don_chitiet`
@@ -381,6 +392,13 @@ ALTER TABLE `sanpham_yeuthich`
 --
 ALTER TABLE `san_pham`
   ADD CONSTRAINT `san_pham_ibfk_1` FOREIGN KEY (`ID_loaisp`) REFERENCES `danhmuc_sanpham` (`ID_loaisp`);
+
+--
+-- Constraints for table `ton_kho`
+--
+ALTER TABLE `ton_kho`
+  ADD CONSTRAINT `ton_kho_ibfk_1` FOREIGN KEY (`ID_sanpham`) REFERENCES `san_pham` (`ID_sanpham`),
+  ADD CONSTRAINT `ton_kho_ibfk_2` FOREIGN KEY (`ID_cuahang`) REFERENCES `cua_hang` (`ID_cuahang`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
