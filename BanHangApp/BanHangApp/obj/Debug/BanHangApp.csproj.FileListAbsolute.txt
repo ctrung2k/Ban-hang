@@ -1,0 +1,10 @@
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\BanHangApp.exe.config
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\BanHangApp.exe
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\BanHangApp.pdb
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\EntityFramework.dll
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\EntityFramework.SqlServer.dll
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\EntityFramework.xml
+D:\Trung\BanHangApp\BanHangApp\bin\Debug\EntityFramework.SqlServer.xml
+D:\Trung\BanHangApp\BanHangApp\obj\Debug\BanHangApp.csprojResolveAssemblyReference.cache
+D:\Trung\BanHangApp\BanHangApp\obj\Debug\BanHangApp.exe
+D:\Trung\BanHangApp\BanHangApp\obj\Debug\BanHangApp.pdb

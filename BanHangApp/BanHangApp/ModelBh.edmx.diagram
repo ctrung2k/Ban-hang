@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ad47b79a8cb44fd83cec9afb0cfbe29" Name="Diagram1">
+        <EntityTypeShape EntityType="Ban_hang_Model.CuaHang" Width="1.5" PointX="4.875" PointY="2.25" />
+        <EntityTypeShape EntityType="Ban_hang_Model.DanhMuc" Width="1.5" PointX="9.375" PointY="4.625" />
+        <EntityTypeShape EntityType="Ban_hang_Model.HoaDon" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Ban_hang_Model.KhachHang" Width="1.5" PointX="5" PointY="5" />
+        <EntityTypeShape EntityType="Ban_hang_Model.NhaCungCap" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Ban_hang_Model.NhanVien" Width="1.5" PointX="7.25" PointY="5.75" />
+        <EntityTypeShape EntityType="Ban_hang_Model.QuangCao" Width="1.5" PointX="0.625" PointY="5.75" />
+        <EntityTypeShape EntityType="Ban_hang_Model.QuyenHan" Width="1.5" PointX="2.75" PointY="5" />
+        <EntityTypeShape EntityType="Ban_hang_Model.SanPham" Width="1.5" PointX="0.625" PointY="2.125" />
+        <EntityTypeShape EntityType="Ban_hang_Model.ChiTietHoaDon" Width="1.5" PointX="10.125" PointY="1.875" />
+        <EntityTypeShape EntityType="Ban_hang_Model.CuaHang_SanPham" Width="1.5" PointX="2.75" PointY="1.875" />
+        <AssociationConnector Association="Ban_hang_Model.FK_CuaHang_SanPham_ToTable" />
+        <AssociationConnector Association="Ban_hang_Model.FK_KhachHang_ToQuyenHan" />
+        <AssociationConnector Association="Ban_hang_Model.FK_CuaHang_SanPham_ToSanpham" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
