@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2020 at 12:36 PM
+-- Generation Time: Sep 21, 2020 at 06:09 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -33,6 +33,20 @@ CREATE TABLE `cuahang_sanpham` (
   `Gia_theo_quan` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cuahang_sanpham`
+--
+
+INSERT INTO `cuahang_sanpham` (`ID_cuahang`, `ID_sanpham`, `Gia_theo_quan`) VALUES
+(1, 8934588013133, 8000),
+(1, 8934588233074, 10000),
+(1, 8936193070013, 10000),
+(1, 8934588873058, 8000),
+(2, 8934588013133, 10000),
+(2, 8934588233074, 12000),
+(2, 8936193070013, 12000),
+(2, 8934588873058, 10000);
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +59,14 @@ CREATE TABLE `cua_hang` (
   `Diachi_cuahang` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `cua_hang`
+--
+
+INSERT INTO `cua_hang` (`ID_cuahang`, `Ten_cuahang`, `Diachi_cuahang`) VALUES
+(1, '3T_BinhThanh', '123 abc P.26, Q. Bình thạnh, TP. HCM'),
+(2, '3T_ThuDuc', '456 dfe P. Hiệp Bình Chánh, Q. Thủ Đức, TP. HCM');
+
 -- --------------------------------------------------------
 
 --
@@ -55,6 +77,14 @@ CREATE TABLE `danhmuc_sanpham` (
   `ID_loaisp` int(11) NOT NULL,
   `Ten_loai` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `danhmuc_sanpham`
+--
+
+INSERT INTO `danhmuc_sanpham` (`ID_loaisp`, `Ten_loai`) VALUES
+(1, 'Nước'),
+(2, 'Thức ăn nhẹ');
 
 -- --------------------------------------------------------
 
@@ -130,6 +160,13 @@ CREATE TABLE `nha_cungcap` (
   `Diachi_nhacc` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nha_cungcap`
+--
+
+INSERT INTO `nha_cungcap` (`ID_nhacc`, `Ten_nhacc`, `Diachi_nhacc`) VALUES
+(1, 'Pepsico', '88 Đồng Khởi, P. Bến Nghé, Q. 1, TP. HCM');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +198,15 @@ CREATE TABLE `quyen_han` (
   `Ton_kho` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `quyen_han`
+--
+
+INSERT INTO `quyen_han` (`ID_chucvu`, `Ten_chucvu`, `Tao_order`, `Sua_order`, `Huy_order`, `Tao_taikhoan`, `Sua_taikhoan`, `Dis_taikhoan`, `Ton_kho`) VALUES
+(1, 'Khách hàng', 1, 1, 1, 1, 1, 0, 0),
+(2, 'Quản lý', 1, 1, 1, 1, 1, 1, 1),
+(3, 'Nhân viên', 1, 1, 1, 0, 1, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -187,6 +233,16 @@ CREATE TABLE `san_pham` (
   `Sanpham_moi` tinyint(1) NOT NULL,
   `Hinh_sanpham` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `san_pham`
+--
+
+INSERT INTO `san_pham` (`ID_sanpham`, `Ten_sanpham`, `Soluong_tonkho`, `ID_loaisp`, `Sanpham_hot`, `Sanpham_moi`, `Hinh_sanpham`) VALUES
+(8934588013133, 'Pepsi 390ml', 0, 1, 0, 0, ''),
+(8934588233074, 'Sting dâu 330ml', 0, 1, 0, 0, ''),
+(8934588873058, 'Trà ô long 350ml', 0, 1, 0, 0, ''),
+(8936193070013, 'Trà xanh không độ 455ml', 0, 1, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -303,13 +359,13 @@ ALTER TABLE `ton_kho`
 -- AUTO_INCREMENT for table `cua_hang`
 --
 ALTER TABLE `cua_hang`
-  MODIFY `ID_cuahang` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_cuahang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `danhmuc_sanpham`
 --
 ALTER TABLE `danhmuc_sanpham`
-  MODIFY `ID_loaisp` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_loaisp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hoa_don`
@@ -333,13 +389,13 @@ ALTER TABLE `nhan_vien`
 -- AUTO_INCREMENT for table `nha_cungcap`
 --
 ALTER TABLE `nha_cungcap`
-  MODIFY `ID_nhacc` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_nhacc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `quyen_han`
 --
 ALTER TABLE `quyen_han`
-  MODIFY `ID_chucvu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_chucvu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
