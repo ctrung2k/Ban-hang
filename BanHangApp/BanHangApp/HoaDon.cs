@@ -14,6 +14,12 @@ namespace BanHangApp
     
     public partial class HoaDon
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HoaDon()
+        {
+            this.SanPhams = new HashSet<SanPham>();
+        }
+    
         public int Id { get; set; }
         public byte[] NgayTao { get; set; }
         public int NhaCC_Id { get; set; }
@@ -22,5 +28,9 @@ namespace BanHangApp
         public int CuaHang_Id { get; set; }
         public int NhanVien_Id { get; set; }
         public string ChuongTrinh_Id { get; set; }
+    
+        public virtual NhaCungCap NhaCungCap { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SanPham> SanPhams { get; set; }
     }
 }

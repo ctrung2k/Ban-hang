@@ -34,7 +34,5 @@ namespace BanHangApp
         public virtual DbSet<QuangCao> QuangCaos { get; set; }
         public virtual DbSet<QuyenHan> QuyenHans { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
-        public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
-        public virtual DbSet<CuaHang_SanPham> CuaHang_SanPham { get; set; }
     }
 }

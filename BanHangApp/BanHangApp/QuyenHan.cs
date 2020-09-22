@@ -18,6 +18,7 @@ namespace BanHangApp
         public QuyenHan()
         {
             this.KhachHangs = new HashSet<KhachHang>();
+            this.NhanViens = new HashSet<NhanVien>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace BanHangApp
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KhachHang> KhachHangs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVien> NhanViens { get; set; }
     }
 }

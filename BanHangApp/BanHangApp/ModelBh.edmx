@@ -5,14 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Ban_hang_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Ban_hang.dbo.ChiTietHoaDon' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="ChiTietHoaDon">
-          <Property Name="HoaDon_Id" Type="int" />
-          <Property Name="SanPham_Id" Type="bigint" />
-          <Property Name="SoLuong" Type="int" />
-          <Property Name="GiaTien" Type="money" />
-        </EntityType>-->
+          <Key>
+            <PropertyRef Name="SanPham_Id" />
+            <PropertyRef Name="HoaDon_Id" />
+          </Key>
+          <Property Name="SanPham_Id" Type="bigint" Nullable="false" />
+          <Property Name="HoaDon_Id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="CuaHang">
           <Key>
             <PropertyRef Name="Id" />
@@ -21,8 +21,6 @@ warning 6013: The table/view 'Ban_hang.dbo.ChiTietHoaDon' does not have a primar
           <Property Name="TenCuaHang" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi_CuaHang" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Ban_hang.dbo.CuaHang_SanPham' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CuaHang_SanPham">
           <Key>
             <PropertyRef Name="CuaHang_Id" />
@@ -30,7 +28,6 @@ warning 6002: The table/view 'Ban_hang.dbo.CuaHang_SanPham' does not have a prim
           </Key>
           <Property Name="CuaHang_Id" Type="int" Nullable="false" />
           <Property Name="SanPham_Id" Type="bigint" Nullable="false" />
-          <Property Name="Gia" Type="money" />
         </EntityType>
         <EntityType Name="DanhMuc">
           <Key>
@@ -83,6 +80,7 @@ warning 6002: The table/view 'Ban_hang.dbo.CuaHang_SanPham' does not have a prim
           <Property Name="NgaySinh" Type="timestamp" StoreGeneratedPattern="Computed" />
           <Property Name="ChucVu_Id" Type="int" />
           <Property Name="DiaChi_NhanVien" Type="nvarchar" MaxLength="100" />
+          <Property Name="CuaHang_Id" Type="int" />
         </EntityType>
         <EntityType Name="QuangCao">
           <Key>
@@ -119,9 +117,30 @@ warning 6002: The table/view 'Ban_hang.dbo.CuaHang_SanPham' does not have a prim
           <Property Name="SanPham_Moi" Type="tinyint" />
           <Property Name="Hinh_SanPham" Type="image" />
         </EntityType>
-        <!--Errors Found During Generation:
-error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_ChiTietHoaDon_ToSanPham" />-->
+        <Association Name="FK_ChiTietHoaDon_ToHoaDon">
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
+          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HoaDon">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChiTietHoaDon">
+              <PropertyRef Name="HoaDon_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChiTietHoaDon_ToSanPham">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+          <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChiTietHoaDon">
+              <PropertyRef Name="SanPham_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CuaHang_SanPham_ToCuaHang">
           <End Role="CuaHang" Type="Self.CuaHang" Multiplicity="1" />
           <End Role="CuaHang_SanPham" Type="Self.CuaHang_SanPham" Multiplicity="*" />
@@ -146,6 +165,18 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HoaDon_ToNhaCC">
+          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
+          <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="NhaCC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_KhachHang_ToQuyenHan">
           <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="0..1" />
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
@@ -158,8 +189,46 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NhanVien_ToCuaHang">
+          <End Role="CuaHang" Type="Self.CuaHang" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuaHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="CuaHang_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_ToQuyenHan">
+          <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuyenHan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="ChucVu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPham_ToDanhMuc">
+          <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="0..1" />
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DanhMuc">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SanPham">
+              <PropertyRef Name="DanhMuc_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Ban_hang_ModelStoreContainer">
+          <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuaHang" EntityType="Self.CuaHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuaHang_SanPham" EntityType="Self.CuaHang_SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
@@ -168,13 +237,14 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <EntitySet Name="QuangCao" EntityType="Self.QuangCao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuyenHan" EntityType="Self.QuyenHan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CuaHang_SanPham" EntityType="Self.CuaHang_SanPham" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CuaHang_SanPham].[CuaHang_Id] AS [CuaHang_Id], 
-    [CuaHang_SanPham].[SanPham_Id] AS [SanPham_Id], 
-    [CuaHang_SanPham].[Gia] AS [Gia]
-    FROM [dbo].[CuaHang_SanPham] AS [CuaHang_SanPham]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_ChiTietHoaDon_ToHoaDon" Association="Self.FK_ChiTietHoaDon_ToHoaDon">
+            <End Role="HoaDon" EntitySet="HoaDon" />
+            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChiTietHoaDon_ToSanPham" Association="Self.FK_ChiTietHoaDon_ToSanPham">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
+          </AssociationSet>
           <AssociationSet Name="FK_CuaHang_SanPham_ToCuaHang" Association="Self.FK_CuaHang_SanPham_ToCuaHang">
             <End Role="CuaHang" EntitySet="CuaHang" />
             <End Role="CuaHang_SanPham" EntitySet="CuaHang_SanPham" />
@@ -183,9 +253,25 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="CuaHang_SanPham" EntitySet="CuaHang_SanPham" />
           </AssociationSet>
+          <AssociationSet Name="FK_HoaDon_ToNhaCC" Association="Self.FK_HoaDon_ToNhaCC">
+            <End Role="NhaCungCap" EntitySet="NhaCungCap" />
+            <End Role="HoaDon" EntitySet="HoaDon" />
+          </AssociationSet>
           <AssociationSet Name="FK_KhachHang_ToQuyenHan" Association="Self.FK_KhachHang_ToQuyenHan">
             <End Role="QuyenHan" EntitySet="QuyenHan" />
             <End Role="KhachHang" EntitySet="KhachHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_ToCuaHang" Association="Self.FK_NhanVien_ToCuaHang">
+            <End Role="CuaHang" EntitySet="CuaHang" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_ToQuyenHan" Association="Self.FK_NhanVien_ToQuyenHan">
+            <End Role="QuyenHan" EntitySet="QuyenHan" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPham_ToDanhMuc" Association="Self.FK_SanPham_ToDanhMuc">
+            <End Role="DanhMuc" EntitySet="DanhMuc" />
+            <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -202,21 +288,35 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <EntitySet Name="QuangCaos" EntityType="Ban_hang_Model.QuangCao" />
           <EntitySet Name="QuyenHans" EntityType="Ban_hang_Model.QuyenHan" />
           <EntitySet Name="SanPhams" EntityType="Ban_hang_Model.SanPham" />
-          <EntitySet Name="ChiTietHoaDons" EntityType="Ban_hang_Model.ChiTietHoaDon" />
-          <EntitySet Name="CuaHang_SanPham" EntityType="Ban_hang_Model.CuaHang_SanPham" />
-          <AssociationSet Name="FK_CuaHang_SanPham_ToTable" Association="Ban_hang_Model.FK_CuaHang_SanPham_ToTable">
-            <End Role="CuaHang" EntitySet="CuaHangs" />
-            <End Role="CuaHang_SanPham" EntitySet="CuaHang_SanPham" />
-          </AssociationSet>
           <AssociationSet Name="FK_KhachHang_ToQuyenHan" Association="Ban_hang_Model.FK_KhachHang_ToQuyenHan">
             <End Role="QuyenHan" EntitySet="QuyenHans" />
             <End Role="KhachHang" EntitySet="KhachHangs" />
           </AssociationSet>
-          <AssociationSet Name="FK_CuaHang_SanPham_ToSanpham" Association="Ban_hang_Model.FK_CuaHang_SanPham_ToSanpham">
+          <AssociationSet Name="CuaHang_SanPham" Association="Ban_hang_Model.CuaHang_SanPham">
+            <End Role="CuaHang" EntitySet="CuaHangs" />
             <End Role="SanPham" EntitySet="SanPhams" />
-            <End Role="CuaHang_SanPham" EntitySet="CuaHang_SanPham" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_SanPham_ToDanhMuc" Association="Ban_hang_Model.FK_SanPham_ToDanhMuc">
+            <End Role="DanhMuc" EntitySet="DanhMucs" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_ToQuyenHan" Association="Ban_hang_Model.FK_NhanVien_ToQuyenHan">
+            <End Role="QuyenHan" EntitySet="QuyenHans" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HoaDon_ToNhaCC" Association="Ban_hang_Model.FK_HoaDon_ToNhaCC">
+            <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+            <End Role="HoaDon" EntitySet="HoaDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_ToCuaHang" Association="Ban_hang_Model.FK_NhanVien_ToCuaHang">
+            <End Role="CuaHang" EntitySet="CuaHangs" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+          <AssociationSet Name="ChiTietHoaDon" Association="Ban_hang_Model.ChiTietHoaDon">
+            <End Role="HoaDon" EntitySet="HoaDons" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="CuaHang">
           <Key>
             <PropertyRef Name="Id" />
@@ -224,7 +324,8 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCuaHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi_CuaHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CuaHang_SanPham" Relationship="Ban_hang_Model.FK_CuaHang_SanPham_ToTable" FromRole="CuaHang" ToRole="CuaHang_SanPham" />
+          <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.CuaHang_SanPham" FromRole="CuaHang" ToRole="SanPham" />
+          <NavigationProperty Name="NhanViens" Relationship="Ban_hang_Model.FK_NhanVien_ToCuaHang" FromRole="CuaHang" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="DanhMuc">
           <Key>
@@ -232,6 +333,7 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten_DanhMuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.FK_SanPham_ToDanhMuc" FromRole="DanhMuc" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="HoaDon">
           <Key>
@@ -245,6 +347,8 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <Property Name="CuaHang_Id" Type="Int32" Nullable="false" />
           <Property Name="NhanVien_Id" Type="Int32" Nullable="false" />
           <Property Name="ChuongTrinh_Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhaCungCap" Relationship="Ban_hang_Model.FK_HoaDon_ToNhaCC" FromRole="HoaDon" ToRole="NhaCungCap" />
+          <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.ChiTietHoaDon" FromRole="HoaDon" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -268,6 +372,7 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Ten_NhaCC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi_NhaCC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HoaDons" Relationship="Ban_hang_Model.FK_HoaDon_ToNhaCC" FromRole="NhaCungCap" ToRole="HoaDon" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -278,6 +383,9 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <Property Name="NgaySinh" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="ChucVu_Id" Type="Int32" />
           <Property Name="DiaChi_NhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QuyenHan" Relationship="Ban_hang_Model.FK_NhanVien_ToQuyenHan" FromRole="NhanVien" ToRole="QuyenHan" />
+          <Property Name="CuaHang_Id" Type="Int32" />
+          <NavigationProperty Name="CuaHang" Relationship="Ban_hang_Model.FK_NhanVien_ToCuaHang" FromRole="NhanVien" ToRole="CuaHang" />
         </EntityType>
         <EntityType Name="QuangCao">
           <Key>
@@ -302,6 +410,7 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <Property Name="Disable_TaiKhoan" Type="Byte" />
           <Property Name="TonKho" Type="Byte" />
           <NavigationProperty Name="KhachHangs" Relationship="Ban_hang_Model.FK_KhachHang_ToQuyenHan" FromRole="QuyenHan" ToRole="KhachHang" />
+          <NavigationProperty Name="NhanViens" Relationship="Ban_hang_Model.FK_NhanVien_ToQuyenHan" FromRole="QuyenHan" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="SanPham">
           <Key>
@@ -314,40 +423,10 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <Property Name="SanPham_Hot" Type="Byte" />
           <Property Name="SanPham_Moi" Type="Byte" />
           <Property Name="Hinh_SanPham" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="CuaHang_SanPham" Relationship="Ban_hang_Model.FK_CuaHang_SanPham_ToSanpham" FromRole="SanPham" ToRole="CuaHang_SanPham" />
+          <NavigationProperty Name="CuaHangs" Relationship="Ban_hang_Model.CuaHang_SanPham" FromRole="SanPham" ToRole="CuaHang" />
+          <NavigationProperty Name="DanhMuc" Relationship="Ban_hang_Model.FK_SanPham_ToDanhMuc" FromRole="SanPham" ToRole="DanhMuc" />
+          <NavigationProperty Name="HoaDons" Relationship="Ban_hang_Model.ChiTietHoaDon" FromRole="SanPham" ToRole="HoaDon" />
         </EntityType>
-        <EntityType Name="ChiTietHoaDon">
-          <Key>
-            <PropertyRef Name="HoaDon_Id" />
-          </Key>
-          <Property Name="HoaDon_Id" Type="Int32" Nullable="false" />
-          <Property Name="SanPham_Id" Type="Int32" />
-          <Property Name="SoLuong" Type="Int32" />
-          <Property Name="GiaTien" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
-        <EntityType Name="CuaHang_SanPham">
-          <Key>
-            <PropertyRef Name="CuaHang_Id" />
-            <PropertyRef Name="SanPham_Id" />
-          </Key>
-          <Property Name="CuaHang_Id" Type="Int32" Nullable="false" />
-          <Property Name="SanPham_Id" Type="Int32" Nullable="false" />
-          <Property Name="Gia" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="CuaHang" Relationship="Ban_hang_Model.FK_CuaHang_SanPham_ToTable" FromRole="CuaHang_SanPham" ToRole="CuaHang" />
-          <NavigationProperty Name="SanPham" Relationship="Ban_hang_Model.FK_CuaHang_SanPham_ToSanpham" FromRole="CuaHang_SanPham" ToRole="SanPham" />
-        </EntityType>
-        <Association Name="FK_CuaHang_SanPham_ToTable">
-          <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="1" />
-          <End Type="Ban_hang_Model.CuaHang_SanPham" Role="CuaHang_SanPham" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuaHang">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CuaHang_SanPham">
-              <PropertyRef Name="CuaHang_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_KhachHang_ToQuyenHan">
           <End Type="Ban_hang_Model.QuyenHan" Role="QuyenHan" Multiplicity="0..1" />
           <End Type="Ban_hang_Model.KhachHang" Role="KhachHang" Multiplicity="*" />
@@ -360,17 +439,61 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CuaHang_SanPham_ToSanpham">
-          <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="1" />
-          <End Type="Ban_hang_Model.CuaHang_SanPham" Role="CuaHang_SanPham" Multiplicity="*" />
+        <Association Name="CuaHang_SanPham">
+          <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="*" />
+          <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SanPham_ToDanhMuc">
+          <End Type="Ban_hang_Model.DanhMuc" Role="DanhMuc" Multiplicity="0..1" />
+          <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SanPham">
+            <Principal Role="DanhMuc">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CuaHang_SanPham">
-              <PropertyRef Name="SanPham_Id" />
+            <Dependent Role="SanPham">
+              <PropertyRef Name="DanhMuc_ID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_ToQuyenHan">
+          <End Type="Ban_hang_Model.QuyenHan" Role="QuyenHan" Multiplicity="0..1" />
+          <End Type="Ban_hang_Model.NhanVien" Role="NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuyenHan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="ChucVu_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HoaDon_ToNhaCC">
+          <End Type="Ban_hang_Model.NhaCungCap" Role="NhaCungCap" Multiplicity="1" />
+          <End Type="Ban_hang_Model.HoaDon" Role="HoaDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HoaDon">
+              <PropertyRef Name="NhaCC_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_ToCuaHang">
+          <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="0..1" />
+          <End Type="Ban_hang_Model.NhanVien" Role="NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuaHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="CuaHang_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ChiTietHoaDon">
+          <End Type="Ban_hang_Model.HoaDon" Role="HoaDon" Multiplicity="*" />
+          <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -436,6 +559,7 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
           <EntitySetMapping Name="NhanViens">
             <EntityTypeMapping TypeName="Ban_hang_Model.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="CuaHang_Id" ColumnName="CuaHang_Id" />
                 <ScalarProperty Name="DiaChi_NhanVien" ColumnName="DiaChi_NhanVien" />
                 <ScalarProperty Name="ChucVu_Id" ColumnName="ChucVu_Id" />
                 <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
@@ -482,15 +606,22 @@ error 6004: The table 'Ban_hang.dbo.ChiTietHoaDon' is referenced by a relationsh
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CuaHang_SanPham">
-            <EntityTypeMapping TypeName="Ban_hang_Model.CuaHang_SanPham">
-              <MappingFragment StoreEntitySet="CuaHang_SanPham">
-                <ScalarProperty Name="Gia" ColumnName="Gia" />
-                <ScalarProperty Name="SanPham_Id" ColumnName="SanPham_Id" />
-                <ScalarProperty Name="CuaHang_Id" ColumnName="CuaHang_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="CuaHang_SanPham" TypeName="Ban_hang_Model.CuaHang_SanPham" StoreEntitySet="CuaHang_SanPham">
+            <EndProperty Name="SanPham">
+              <ScalarProperty Name="Id" ColumnName="SanPham_Id" />
+            </EndProperty>
+            <EndProperty Name="CuaHang">
+              <ScalarProperty Name="Id" ColumnName="CuaHang_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ChiTietHoaDon" TypeName="Ban_hang_Model.ChiTietHoaDon" StoreEntitySet="ChiTietHoaDon">
+            <EndProperty Name="SanPham">
+              <ScalarProperty Name="Id" ColumnName="SanPham_Id" />
+            </EndProperty>
+            <EndProperty Name="HoaDon">
+              <ScalarProperty Name="Id" ColumnName="HoaDon_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

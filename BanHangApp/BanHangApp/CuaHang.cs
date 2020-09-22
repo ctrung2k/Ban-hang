@@ -17,7 +17,8 @@ namespace BanHangApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CuaHang()
         {
-            this.CuaHang_SanPham = new HashSet<CuaHang_SanPham>();
+            this.SanPhams = new HashSet<SanPham>();
+            this.NhanViens = new HashSet<NhanVien>();
         }
     
         public int Id { get; set; }
@@ -25,6 +26,8 @@ namespace BanHangApp
         public string DiaChi_CuaHang { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CuaHang_SanPham> CuaHang_SanPham { get; set; }
+        public virtual ICollection<SanPham> SanPhams { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVien> NhanViens { get; set; }
     }
 }

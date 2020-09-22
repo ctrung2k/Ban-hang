@@ -19,5 +19,9 @@ namespace BanHangApp
         public byte[] NgaySinh { get; set; }
         public Nullable<int> ChucVu_Id { get; set; }
         public string DiaChi_NhanVien { get; set; }
+        public Nullable<int> CuaHang_Id { get; set; }
+    
+        public virtual QuyenHan QuyenHan { get; set; }
+        public virtual CuaHang CuaHang { get; set; }
     }
 }

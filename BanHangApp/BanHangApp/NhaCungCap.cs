@@ -14,8 +14,17 @@ namespace BanHangApp
     
     public partial class NhaCungCap
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NhaCungCap()
+        {
+            this.HoaDons = new HashSet<HoaDon>();
+        }
+    
         public int Id { get; set; }
         public string Ten_NhaCC { get; set; }
         public string DiaChi_NhaCC { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HoaDon> HoaDons { get; set; }
     }
 }
