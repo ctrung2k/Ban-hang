@@ -42,8 +42,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,8 +57,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD:App_BanHang/App_BanHang/App_BanHang.csproj
     <Compile Include="Controllers\Dangnhap.cs" />
     <Compile Include="ModelDB.Context.cs">
+=======
+    <Compile Include="Ban_hangDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ban_hangDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CuaHang.cs">
+      <DependentUpon>ModelBh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DanhMuc.cs">
+      <DependentUpon>ModelBh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HoaDon.cs">
+      <DependentUpon>ModelBh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KhachHang.cs">
+      <DependentUpon>ModelBh.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelBh.Context.cs">
+>>>>>>> 2dadb68536d7b1e5ab908e33831fc5130b70b4c6:BanHangApp/BanHangApp/BanHangApp.csproj
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelDB.Context.tt</DependentUpon>
@@ -74,8 +97,18 @@
     <Compile Include="Models\Dangnhap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD:App_BanHang/App_BanHang/App_BanHang.csproj
     <Compile Include="Views\frm_dangnhap.cs">
       <SubType>Form</SubType>
+=======
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="QuangCao.cs">
+      <DependentUpon>ModelBh.tt</DependentUpon>
+>>>>>>> 2dadb68536d7b1e5ab908e33831fc5130b70b4c6:BanHangApp/BanHangApp/BanHangApp.csproj
     </Compile>
     <Compile Include="Views\frm_dangnhap.Designer.cs">
       <DependentUpon>frm_dangnhap.cs</DependentUpon>
@@ -83,6 +116,7 @@
     <Compile Include="Views\frm_giohang.cs">
       <SubType>Form</SubType>
     </Compile>
+<<<<<<< HEAD:App_BanHang/App_BanHang/App_BanHang.csproj
     <Compile Include="Views\frm_giohang.Designer.cs">
       <DependentUpon>frm_giohang.cs</DependentUpon>
     </Compile>
@@ -111,17 +145,52 @@
       <DependentUpon>frm_thanhtoan.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="ModelDB.edmx">
+=======
+    <Compile Include="Views\Form1_t.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form1_t.Designer.cs">
+      <DependentUpon>Form1_t.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form_Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Form_Test.Designer.cs">
+      <DependentUpon>Form_Test.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="ModelBh.edmx">
+>>>>>>> 2dadb68536d7b1e5ab908e33831fc5130b70b4c6:BanHangApp/BanHangApp/BanHangApp.csproj
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
+<<<<<<< HEAD:App_BanHang/App_BanHang/App_BanHang.csproj
     <None Include="ModelDB.edmx.diagram">
       <DependentUpon>ModelDB.edmx</DependentUpon>
+=======
+    <None Include="Ban_hangDataSet.xsc">
+      <DependentUpon>Ban_hangDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Ban_hangDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Ban_hangDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Ban_hangDataSet.xss">
+      <DependentUpon>Ban_hangDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ModelBh.edmx.diagram">
+      <DependentUpon>ModelBh.edmx</DependentUpon>
+>>>>>>> 2dadb68536d7b1e5ab908e33831fc5130b70b4c6:BanHangApp/BanHangApp/BanHangApp.csproj
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+<<<<<<< HEAD:App_BanHang/App_BanHang/App_BanHang.csproj
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -130,6 +199,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+=======
+>>>>>>> 2dadb68536d7b1e5ab908e33831fc5130b70b4c6:BanHangApp/BanHangApp/BanHangApp.csproj
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelDB.Context.tt">
@@ -145,6 +216,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Form1_t.resx">
+      <DependentUpon>Form1_t.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Form_Test.resx">
+      <DependentUpon>Form_Test.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
