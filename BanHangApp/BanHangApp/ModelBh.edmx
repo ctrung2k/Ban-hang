@@ -21,14 +21,6 @@
           <Property Name="TenCuaHang" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi_CuaHang" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="CuaHang_SanPham">
-          <Key>
-            <PropertyRef Name="CuaHang_Id" />
-            <PropertyRef Name="SanPham_Id" />
-          </Key>
-          <Property Name="CuaHang_Id" Type="int" Nullable="false" />
-          <Property Name="SanPham_Id" Type="bigint" Nullable="false" />
-        </EntityType>
         <EntityType Name="DanhMuc">
           <Key>
             <PropertyRef Name="Id" />
@@ -117,6 +109,14 @@
           <Property Name="SanPham_Moi" Type="tinyint" />
           <Property Name="Hinh_SanPham" Type="image" />
         </EntityType>
+        <EntityType Name="SanPhamCuaHang">
+          <Key>
+            <PropertyRef Name="SanPham_Id" />
+            <PropertyRef Name="CuaHang_Id" />
+          </Key>
+          <Property Name="SanPham_Id" Type="bigint" Nullable="false" />
+          <Property Name="CuaHang_Id" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_ChiTietHoaDon_ToHoaDon">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
           <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
@@ -137,30 +137,6 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="ChiTietHoaDon">
-              <PropertyRef Name="SanPham_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CuaHang_SanPham_ToCuaHang">
-          <End Role="CuaHang" Type="Self.CuaHang" Multiplicity="1" />
-          <End Role="CuaHang_SanPham" Type="Self.CuaHang_SanPham" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CuaHang">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CuaHang_SanPham">
-              <PropertyRef Name="CuaHang_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CuaHang_SanPham_ToSanpham">
-          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
-          <End Role="CuaHang_SanPham" Type="Self.CuaHang_SanPham" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SanPham">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CuaHang_SanPham">
               <PropertyRef Name="SanPham_Id" />
             </Dependent>
           </ReferentialConstraint>
@@ -225,10 +201,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SanPhamCuaHang_CuaHang">
+          <End Role="CuaHang" Type="Self.CuaHang" Multiplicity="1" />
+          <End Role="SanPhamCuaHang" Type="Self.SanPhamCuaHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CuaHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SanPhamCuaHang">
+              <PropertyRef Name="CuaHang_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SanPhamCuaHang_SanPham">
+          <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+          <End Role="SanPhamCuaHang" Type="Self.SanPhamCuaHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SanPham">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SanPhamCuaHang">
+              <PropertyRef Name="SanPham_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Ban_hang_ModelStoreContainer">
           <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuaHang" EntityType="Self.CuaHang" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CuaHang_SanPham" EntityType="Self.CuaHang_SanPham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DanhMuc" EntityType="Self.DanhMuc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
@@ -237,6 +236,7 @@
           <EntitySet Name="QuangCao" EntityType="Self.QuangCao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuyenHan" EntityType="Self.QuyenHan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SanPhamCuaHang" EntityType="Self.SanPhamCuaHang" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ChiTietHoaDon_ToHoaDon" Association="Self.FK_ChiTietHoaDon_ToHoaDon">
             <End Role="HoaDon" EntitySet="HoaDon" />
             <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
@@ -244,14 +244,6 @@
           <AssociationSet Name="FK_ChiTietHoaDon_ToSanPham" Association="Self.FK_ChiTietHoaDon_ToSanPham">
             <End Role="SanPham" EntitySet="SanPham" />
             <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CuaHang_SanPham_ToCuaHang" Association="Self.FK_CuaHang_SanPham_ToCuaHang">
-            <End Role="CuaHang" EntitySet="CuaHang" />
-            <End Role="CuaHang_SanPham" EntitySet="CuaHang_SanPham" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CuaHang_SanPham_ToSanpham" Association="Self.FK_CuaHang_SanPham_ToSanpham">
-            <End Role="SanPham" EntitySet="SanPham" />
-            <End Role="CuaHang_SanPham" EntitySet="CuaHang_SanPham" />
           </AssociationSet>
           <AssociationSet Name="FK_HoaDon_ToNhaCC" Association="Self.FK_HoaDon_ToNhaCC">
             <End Role="NhaCungCap" EntitySet="NhaCungCap" />
@@ -273,6 +265,14 @@
             <End Role="DanhMuc" EntitySet="DanhMuc" />
             <End Role="SanPham" EntitySet="SanPham" />
           </AssociationSet>
+          <AssociationSet Name="FK_SanPhamCuaHang_CuaHang" Association="Self.FK_SanPhamCuaHang_CuaHang">
+            <End Role="CuaHang" EntitySet="CuaHang" />
+            <End Role="SanPhamCuaHang" EntitySet="SanPhamCuaHang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SanPhamCuaHang_SanPham" Association="Self.FK_SanPhamCuaHang_SanPham">
+            <End Role="SanPham" EntitySet="SanPham" />
+            <End Role="SanPhamCuaHang" EntitySet="SanPhamCuaHang" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -291,10 +291,6 @@
           <AssociationSet Name="FK_KhachHang_ToQuyenHan" Association="Ban_hang_Model.FK_KhachHang_ToQuyenHan">
             <End Role="QuyenHan" EntitySet="QuyenHans" />
             <End Role="KhachHang" EntitySet="KhachHangs" />
-          </AssociationSet>
-          <AssociationSet Name="CuaHang_SanPham" Association="Ban_hang_Model.CuaHang_SanPham">
-            <End Role="CuaHang" EntitySet="CuaHangs" />
-            <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
           <AssociationSet Name="FK_SanPham_ToDanhMuc" Association="Ban_hang_Model.FK_SanPham_ToDanhMuc">
             <End Role="DanhMuc" EntitySet="DanhMucs" />
@@ -316,6 +312,10 @@
             <End Role="HoaDon" EntitySet="HoaDons" />
             <End Role="SanPham" EntitySet="SanPhams" />
           </AssociationSet>
+          <AssociationSet Name="SanPhamCuaHang" Association="Ban_hang_Model.SanPhamCuaHang">
+            <End Role="CuaHang" EntitySet="CuaHangs" />
+            <End Role="SanPham" EntitySet="SanPhams" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CuaHang">
           <Key>
@@ -324,8 +324,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TenCuaHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi_CuaHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.CuaHang_SanPham" FromRole="CuaHang" ToRole="SanPham" />
           <NavigationProperty Name="NhanViens" Relationship="Ban_hang_Model.FK_NhanVien_ToCuaHang" FromRole="CuaHang" ToRole="NhanVien" />
+          <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.SanPhamCuaHang" FromRole="CuaHang" ToRole="SanPham" />
         </EntityType>
         <EntityType Name="DanhMuc">
           <Key>
@@ -423,9 +423,9 @@
           <Property Name="SanPham_Hot" Type="Byte" />
           <Property Name="SanPham_Moi" Type="Byte" />
           <Property Name="Hinh_SanPham" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="CuaHangs" Relationship="Ban_hang_Model.CuaHang_SanPham" FromRole="SanPham" ToRole="CuaHang" />
           <NavigationProperty Name="DanhMuc" Relationship="Ban_hang_Model.FK_SanPham_ToDanhMuc" FromRole="SanPham" ToRole="DanhMuc" />
           <NavigationProperty Name="HoaDons" Relationship="Ban_hang_Model.ChiTietHoaDon" FromRole="SanPham" ToRole="HoaDon" />
+          <NavigationProperty Name="CuaHangs" Relationship="Ban_hang_Model.SanPhamCuaHang" FromRole="SanPham" ToRole="CuaHang" />
         </EntityType>
         <Association Name="FK_KhachHang_ToQuyenHan">
           <End Type="Ban_hang_Model.QuyenHan" Role="QuyenHan" Multiplicity="0..1" />
@@ -438,10 +438,6 @@
               <PropertyRef Name="ChucVu_Id" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="CuaHang_SanPham">
-          <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="*" />
-          <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
         </Association>
         <Association Name="FK_SanPham_ToDanhMuc">
           <End Type="Ban_hang_Model.DanhMuc" Role="DanhMuc" Multiplicity="0..1" />
@@ -493,6 +489,10 @@
         </Association>
         <Association Name="ChiTietHoaDon">
           <End Type="Ban_hang_Model.HoaDon" Role="HoaDon" Multiplicity="*" />
+          <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
+        </Association>
+        <Association Name="SanPhamCuaHang">
+          <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="*" />
           <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
         </Association>
         </Schema>
@@ -606,20 +606,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CuaHang_SanPham" TypeName="Ban_hang_Model.CuaHang_SanPham" StoreEntitySet="CuaHang_SanPham">
-            <EndProperty Name="SanPham">
-              <ScalarProperty Name="Id" ColumnName="SanPham_Id" />
-            </EndProperty>
-            <EndProperty Name="CuaHang">
-              <ScalarProperty Name="Id" ColumnName="CuaHang_Id" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="ChiTietHoaDon" TypeName="Ban_hang_Model.ChiTietHoaDon" StoreEntitySet="ChiTietHoaDon">
             <EndProperty Name="SanPham">
               <ScalarProperty Name="Id" ColumnName="SanPham_Id" />
             </EndProperty>
             <EndProperty Name="HoaDon">
               <ScalarProperty Name="Id" ColumnName="HoaDon_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SanPhamCuaHang" TypeName="Ban_hang_Model.SanPhamCuaHang" StoreEntitySet="SanPhamCuaHang">
+            <EndProperty Name="SanPham">
+              <ScalarProperty Name="Id" ColumnName="SanPham_Id" />
+            </EndProperty>
+            <EndProperty Name="CuaHang">
+              <ScalarProperty Name="Id" ColumnName="CuaHang_Id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>
