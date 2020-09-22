@@ -116,6 +116,7 @@
           </Key>
           <Property Name="SanPham_Id" Type="bigint" Nullable="false" />
           <Property Name="CuaHang_Id" Type="int" Nullable="false" />
+          <Property Name="Gia" Type="money" />
         </EntityType>
         <Association Name="FK_ChiTietHoaDon_ToHoaDon">
           <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
