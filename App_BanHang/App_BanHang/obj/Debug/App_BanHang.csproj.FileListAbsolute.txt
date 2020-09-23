@@ -1,0 +1,20 @@
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\bin\Debug\App_BanHang.exe.config
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\bin\Debug\App_BanHang.exe
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\bin\Debug\App_BanHang.pdb
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csprojAssemblyReference.cache
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Properties.Resources.resources
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_dangnhap.resources
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_thanhtoan.resources
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.GenerateResource.cache
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.exe
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.pdb
+C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_giohang.resources
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csprojAssemblyReference.cache
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Properties.Resources.resources
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_dangnhap.resources
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_giohang.resources
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_thanhtoan.resources
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.GenerateResource.cache
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.CoreCompileInputs.cache
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.exe
+C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.pdb
