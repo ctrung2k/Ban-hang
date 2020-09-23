@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Ban_hang_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Ban_hang_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CuaHangs" EntityType="Ban_hang_Model.CuaHang" />
+    <EntitySet Name="DanhMucs" EntityType="Ban_hang_Model.DanhMuc" />
+    <EntitySet Name="HoaDons" EntityType="Ban_hang_Model.HoaDon" />
+    <EntitySet Name="KhachHangs" EntityType="Ban_hang_Model.KhachHang" />
+    <EntitySet Name="NhaCungCaps" EntityType="Ban_hang_Model.NhaCungCap" />
+    <EntitySet Name="NhanViens" EntityType="Ban_hang_Model.NhanVien" />
+    <EntitySet Name="QuangCaos" EntityType="Ban_hang_Model.QuangCao" />
+    <EntitySet Name="QuyenHans" EntityType="Ban_hang_Model.QuyenHan" />
+    <EntitySet Name="SanPhams" EntityType="Ban_hang_Model.SanPham" />
+    <AssociationSet Name="FK_KhachHang_ToQuyenHan" Association="Ban_hang_Model.FK_KhachHang_ToQuyenHan">
+      <End Role="QuyenHan" EntitySet="QuyenHans" />
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SanPham_ToDanhMuc" Association="Ban_hang_Model.FK_SanPham_ToDanhMuc">
+      <End Role="DanhMuc" EntitySet="DanhMucs" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NhanVien_ToQuyenHan" Association="Ban_hang_Model.FK_NhanVien_ToQuyenHan">
+      <End Role="QuyenHan" EntitySet="QuyenHans" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HoaDon_ToNhaCC" Association="Ban_hang_Model.FK_HoaDon_ToNhaCC">
+      <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+      <End Role="HoaDon" EntitySet="HoaDons" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NhanVien_ToCuaHang" Association="Ban_hang_Model.FK_NhanVien_ToCuaHang">
+      <End Role="CuaHang" EntitySet="CuaHangs" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
+    <AssociationSet Name="ChiTietHoaDon" Association="Ban_hang_Model.ChiTietHoaDon">
+      <End Role="HoaDon" EntitySet="HoaDons" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+    <AssociationSet Name="SanPhamCuaHang" Association="Ban_hang_Model.SanPhamCuaHang">
+      <End Role="CuaHang" EntitySet="CuaHangs" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CuaHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenCuaHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi_CuaHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanViens" Relationship="Ban_hang_Model.FK_NhanVien_ToCuaHang" FromRole="CuaHang" ToRole="NhanVien" />
+    <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.SanPhamCuaHang" FromRole="CuaHang" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="DanhMuc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_DanhMuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.FK_SanPham_ToDanhMuc" FromRole="DanhMuc" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="HoaDon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NgayTao" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="NhaCC_Id" Type="Int32" Nullable="false" />
+    <Property Name="ThanhTien" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="KhachHang_Id" Type="Int32" Nullable="false" />
+    <Property Name="CuaHang_Id" Type="Int32" Nullable="false" />
+    <Property Name="NhanVien_Id" Type="Int32" Nullable="false" />
+    <Property Name="ChuongTrinh_Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhaCungCap" Relationship="Ban_hang_Model.FK_HoaDon_ToNhaCC" FromRole="HoaDon" ToRole="NhaCungCap" />
+    <NavigationProperty Name="SanPhams" Relationship="Ban_hang_Model.ChiTietHoaDon" FromRole="HoaDon" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="KhachHang">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_KhachHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email_KhachHang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pass_KhachHang" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="GioiTinh_KhachHang" Type="Byte" />
+    <Property Name="Diem_KhachHang" Type="Int32" />
+    <Property Name="ChucVu_Id" Type="Int32" />
+    <Property Name="DiaChi_KhachHang" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Avatar_KhachHang" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="QuyenHan" Relationship="Ban_hang_Model.FK_KhachHang_ToQuyenHan" FromRole="KhachHang" ToRole="QuyenHan" />
+  </EntityType>
+  <EntityType Name="NhaCungCap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ten_NhaCC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi_NhaCC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HoaDons" Relationship="Ban_hang_Model.FK_HoaDon_ToNhaCC" FromRole="NhaCungCap" ToRole="HoaDon" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_NhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NgaySinh" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ChucVu_Id" Type="Int32" />
+    <Property Name="DiaChi_NhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="QuyenHan" Relationship="Ban_hang_Model.FK_NhanVien_ToQuyenHan" FromRole="NhanVien" ToRole="QuyenHan" />
+    <Property Name="CuaHang_Id" Type="Int32" />
+    <NavigationProperty Name="CuaHang" Relationship="Ban_hang_Model.FK_NhanVien_ToCuaHang" FromRole="NhanVien" ToRole="CuaHang" />
+  </EntityType>
+  <EntityType Name="QuangCao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ten_ChuongTrinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MoTa_ChuongTrinh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HinhAnh_ChuongTrinh" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="QuyenHan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten_ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tao_Order" Type="Byte" />
+    <Property Name="Sua_Order" Type="Byte" />
+    <Property Name="Huy_Order" Type="Byte" />
+    <Property Name="Tao_Taikhoan" Type="Byte" />
+    <Property Name="Sua_TaiKhoan" Type="Byte" />
+    <Property Name="Disable_TaiKhoan" Type="Byte" />
+    <Property Name="TonKho" Type="Byte" />
+    <NavigationProperty Name="KhachHangs" Relationship="Ban_hang_Model.FK_KhachHang_ToQuyenHan" FromRole="QuyenHan" ToRole="KhachHang" />
+    <NavigationProperty Name="NhanViens" Relationship="Ban_hang_Model.FK_NhanVien_ToQuyenHan" FromRole="QuyenHan" ToRole="NhanVien" />
+  </EntityType>
+  <EntityType Name="SanPham">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Ten_sp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="DanhMuc_ID" Type="Int32" />
+    <Property Name="SoLuongTonKho" Type="Int32" />
+    <Property Name="SanPham_Hot" Type="Byte" />
+    <Property Name="SanPham_Moi" Type="Byte" />
+    <Property Name="Hinh_SanPham" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="DanhMuc" Relationship="Ban_hang_Model.FK_SanPham_ToDanhMuc" FromRole="SanPham" ToRole="DanhMuc" />
+    <NavigationProperty Name="HoaDons" Relationship="Ban_hang_Model.ChiTietHoaDon" FromRole="SanPham" ToRole="HoaDon" />
+    <NavigationProperty Name="CuaHangs" Relationship="Ban_hang_Model.SanPhamCuaHang" FromRole="SanPham" ToRole="CuaHang" />
+  </EntityType>
+  <Association Name="FK_KhachHang_ToQuyenHan">
+    <End Type="Ban_hang_Model.QuyenHan" Role="QuyenHan" Multiplicity="0..1" />
+    <End Type="Ban_hang_Model.KhachHang" Role="KhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenHan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KhachHang">
+        <PropertyRef Name="ChucVu_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SanPham_ToDanhMuc">
+    <End Type="Ban_hang_Model.DanhMuc" Role="DanhMuc" Multiplicity="0..1" />
+    <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMuc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="DanhMuc_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NhanVien_ToQuyenHan">
+    <End Type="Ban_hang_Model.QuyenHan" Role="QuyenHan" Multiplicity="0..1" />
+    <End Type="Ban_hang_Model.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuyenHan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="ChucVu_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HoaDon_ToNhaCC">
+    <End Type="Ban_hang_Model.NhaCungCap" Role="NhaCungCap" Multiplicity="1" />
+    <End Type="Ban_hang_Model.HoaDon" Role="HoaDon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaCungCap">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HoaDon">
+        <PropertyRef Name="NhaCC_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NhanVien_ToCuaHang">
+    <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="0..1" />
+    <End Type="Ban_hang_Model.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CuaHang">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="CuaHang_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChiTietHoaDon">
+    <End Type="Ban_hang_Model.HoaDon" Role="HoaDon" Multiplicity="*" />
+    <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
+  </Association>
+  <Association Name="SanPhamCuaHang">
+    <End Type="Ban_hang_Model.CuaHang" Role="CuaHang" Multiplicity="*" />
+    <End Type="Ban_hang_Model.SanPham" Role="SanPham" Multiplicity="*" />
+  </Association>
+</Schema>
