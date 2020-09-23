@@ -77,6 +77,7 @@
             this.bt_dangnhap.TabIndex = 26;
             this.bt_dangnhap.Text = "Xóa";
             this.bt_dangnhap.UseVisualStyleBackColor = true;
+            this.bt_dangnhap.Click += new System.EventHandler(this.bt_dangnhap_Click);
             // 
             // lb_title
             // 
@@ -109,6 +110,7 @@
             this.Controls.Add(this.lb_title);
             this.Name = "frm_giohang";
             this.Text = "frm_giohang";
+            this.Load += new System.EventHandler(this.frm_giohang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

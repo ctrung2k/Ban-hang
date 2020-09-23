@@ -21,5 +21,10 @@ namespace App_BanHang.Views
         {
 
         }
+
+        private void lb_dangky_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

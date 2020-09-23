@@ -18,7 +18,7 @@ namespace App_BanHang
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_giohang());
+            Application.Run(new frm_spyeuthich());
         }
     }
 }

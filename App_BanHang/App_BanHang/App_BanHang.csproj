@@ -74,6 +74,12 @@
     <Compile Include="Models\Dangnhap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\frm_dangky.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_dangky.Designer.cs">
+      <DependentUpon>frm_dangky.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_dangnhap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,30 @@
     </Compile>
     <Compile Include="Views\frm_giohang.Designer.cs">
       <DependentUpon>frm_giohang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_lichsumuahang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_lichsumuahang.Designer.cs">
+      <DependentUpon>frm_lichsumuahang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_quanlytaikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_quanlytaikhoan.Designer.cs">
+      <DependentUpon>frm_quanlytaikhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_spyeuthich.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_spyeuthich.Designer.cs">
+      <DependentUpon>frm_spyeuthich.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_taikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_taikhoan.Designer.cs">
+      <DependentUpon>frm_taikhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frm_thanhtoan.cs">
       <SubType>Form</SubType>
@@ -101,11 +131,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\frm_dangky.resx">
+      <DependentUpon>frm_dangky.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_dangnhap.resx">
       <DependentUpon>frm_dangnhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_giohang.resx">
       <DependentUpon>frm_giohang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_lichsumuahang.resx">
+      <DependentUpon>frm_lichsumuahang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_quanlytaikhoan.resx">
+      <DependentUpon>frm_quanlytaikhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_spyeuthich.resx">
+      <DependentUpon>frm_spyeuthich.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_taikhoan.resx">
+      <DependentUpon>frm_taikhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_thanhtoan.resx">
       <DependentUpon>frm_thanhtoan.cs</DependentUpon>
