@@ -16,5 +16,17 @@ namespace App_BanHang.Views
         {
             InitializeComponent();
         }
+
+        private void bt_dangnhap_Click(object sender, EventArgs e)
+        {
+            frm_taikhoan i = new frm_taikhoan();
+            i.MdiParent = this;
+            i.Show();
+        }
+
+        private void frm_giohang_Load(object sender, EventArgs e)
+        {
+            //this.IsMdiContainer = true;
+        }
     }
 }

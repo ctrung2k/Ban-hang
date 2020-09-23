@@ -65,6 +65,7 @@
             this.lb_dangky.Size = new System.Drawing.Size(64, 15);
             this.lb_dangky.TabIndex = 5;
             this.lb_dangky.Text = "*Đăng ký";
+            this.lb_dangky.Click += new System.EventHandler(this.lb_dangky_Click);
             // 
             // lb_matkhau
             // 

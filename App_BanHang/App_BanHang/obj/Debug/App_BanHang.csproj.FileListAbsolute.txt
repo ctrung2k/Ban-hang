@@ -9,6 +9,7 @@ C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\A
 C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.exe
 C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.pdb
 C:\Users\VU LEE\source\repos\letranvinhthang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_giohang.resources
+<<<<<<< HEAD
 C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csprojAssemblyReference.cache
 C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Properties.Resources.resources
 C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_dangnhap.resources
@@ -18,3 +19,26 @@ C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.Genera
 C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.CoreCompileInputs.cache
 C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.exe
 C:\Ban-hang\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.pdb
+=======
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\App_BanHang.exe.config
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\App_BanHang.exe
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\App_BanHang.pdb
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\EntityFramework.dll
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\EntityFramework.SqlServer.dll
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\EntityFramework.xml
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\bin\Debug\EntityFramework.SqlServer.xml
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csprojAssemblyReference.cache
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Properties.Resources.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_dangnhap.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_giohang.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_thanhtoan.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.GenerateResource.cache
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.csproj.CopyComplete
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.exe
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.pdb
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_taikhoan.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_quanlytaikhoan.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_dangky.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_lichsumuahang.resources
+C:\xampp\Git\Ban-hang\App_BanHang\App_BanHang\obj\Debug\App_BanHang.Views.frm_spyeuthich.resources
+>>>>>>> 422a76d0243ad760975c3bd29455323ec79b65c4

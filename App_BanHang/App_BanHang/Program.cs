@@ -18,7 +18,11 @@ namespace App_BanHang
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
             Application.Run(new frm_dangnhap());
+=======
+            Application.Run(new frm_spyeuthich());
+>>>>>>> 422a76d0243ad760975c3bd29455323ec79b65c4
         }
     }
 }

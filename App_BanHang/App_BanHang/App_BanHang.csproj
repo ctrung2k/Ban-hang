@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>App_BanHang</RootNamespace>
     <AssemblyName>App_BanHang</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -97,7 +98,16 @@
     <Compile Include="Models\Dangnhap.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
 <<<<<<< HEAD:App_BanHang/App_BanHang/App_BanHang.csproj
+=======
+    <Compile Include="Views\frm_dangky.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_dangky.Designer.cs">
+      <DependentUpon>frm_dangky.cs</DependentUpon>
+    </Compile>
+>>>>>>> 422a76d0243ad760975c3bd29455323ec79b65c4
     <Compile Include="Views\frm_dangnhap.cs">
       <SubType>Form</SubType>
 =======
@@ -120,6 +130,30 @@
     <Compile Include="Views\frm_giohang.Designer.cs">
       <DependentUpon>frm_giohang.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frm_lichsumuahang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_lichsumuahang.Designer.cs">
+      <DependentUpon>frm_lichsumuahang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_quanlytaikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_quanlytaikhoan.Designer.cs">
+      <DependentUpon>frm_quanlytaikhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_spyeuthich.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_spyeuthich.Designer.cs">
+      <DependentUpon>frm_spyeuthich.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frm_taikhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frm_taikhoan.Designer.cs">
+      <DependentUpon>frm_taikhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frm_thanhtoan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,11 +169,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\frm_dangky.resx">
+      <DependentUpon>frm_dangky.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_dangnhap.resx">
       <DependentUpon>frm_dangnhap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_giohang.resx">
       <DependentUpon>frm_giohang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_lichsumuahang.resx">
+      <DependentUpon>frm_lichsumuahang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_quanlytaikhoan.resx">
+      <DependentUpon>frm_quanlytaikhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_spyeuthich.resx">
+      <DependentUpon>frm_spyeuthich.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frm_taikhoan.resx">
+      <DependentUpon>frm_taikhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frm_thanhtoan.resx">
       <DependentUpon>frm_thanhtoan.cs</DependentUpon>
