@@ -31,7 +31,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lb_addres = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -43,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,9 +50,9 @@
             // 
             this.button1.Location = new System.Drawing.Point(183, 324);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(108, 45);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Thanh toán";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // textBox1
@@ -64,7 +64,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lb_addres);
+            this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
@@ -84,15 +84,6 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin KH";
-            // 
-            // lb_addres
-            // 
-            this.lb_addres.FormattingEnabled = true;
-            this.lb_addres.ItemHeight = 18;
-            this.lb_addres.Location = new System.Drawing.Point(132, 95);
-            this.lb_addres.Name = "lb_addres";
-            this.lb_addres.Size = new System.Drawing.Size(214, 94);
-            this.lb_addres.TabIndex = 13;
             // 
             // label1
             // 
@@ -192,6 +183,14 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "THANH TOÁN";
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(132, 95);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(214, 88);
+            this.textBox4.TabIndex = 13;
+            // 
             // frm_thanhtoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,7 +212,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox lb_addres;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -225,5 +223,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox4;
     }
 }
